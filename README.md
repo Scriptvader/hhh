@@ -2,6 +2,8 @@
 
 *This is a simple web crawler searches multiple web pages for string occurrences.*
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/boxpositron/word_crawler)
+
 ## Installation
 
 Be sure to install the requirements for this project located in the **requirements.txt** file.
