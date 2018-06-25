@@ -1,0 +1,11 @@
+{
+    "name": "Word Crawler Server",
+    "description": "Crawler Server Using Python",
+    "repository": "https://github.com/boxpositron/word_crawler",
+    "keywords": [
+        "python",
+        "webcrawler",
+        "flask",
+        "bs4"
+    ]
+}
