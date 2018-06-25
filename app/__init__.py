@@ -5,4 +5,5 @@ from flask import Flask
 app = Flask(__name__, static_folder=None)
 
 # Import the application views
+from app import search
 from app import views
