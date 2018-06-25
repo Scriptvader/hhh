@@ -1,60 +1,36 @@
-import urllib.request
-from bs4 import BeautifulSoup
 import requests
+from bs4 import BeautifulSoup
 
-class string_crawler():
-    url = []
-    word = []
 
-    def input_url(self):
-        while True:
-                try:
-                    url_input = input('Enter Url: ')
-                    urllib.request.Request(url_input)
-                    self.url.append(url_input)
-                    break
-                except ValueError:
-                    print ('Invalid url')
+class StringCrawler(object):
 
-    def get_data(self):
-        while True:
-            try:
-                url_no = int(input('How many web pages will you be searching: '))
-                break
-            except ValueError:
-                print ('Please type in a digit')
-        for i in range (url_no):
-            self.input_url()    
-        word_input = input('Enter word: ')
-        self.word = word_input
-        print('')
+    def __init__(self, word, urls, **kwargs):
+        self.urls = urls
+        self.word = word
 
     def crawl_string(self):
         try:
-            tot_freq = 0
-            for url in self.url:
+            results = []
+
+            for url in self.urls:
+
                 markup = requests.get(url).text
-                soup = BeautifulSoup(markup, 'html.parser')
-                query = soup.find_all('body')	
-                strng = str(query)
-                freq = strng.count(self.word)
-                tot_freq += freq
-                print ('For '+url)
-                print ('The word '+self.word+' appears '+str(freq)+' times.\n')
-            print ('In total '+self.word+' appears '+str(tot_freq)+' times.')
+                soup =  BeautifulSoup(markup, 'html.parser')
+
+                query = soup.find_all('body')
+                
+                frequency = '{0}'.format(query).count(self.word)
+                
+                results.append({
+                    'url': url,
+                    'frequency': frequency
+                })
+
+            return results
+
         except requests.exceptions.ConnectionError:
-            print ('You are not connected to the internet, Please check your connection and try again later.')
-
-    def run_func(self):
-        self.get_data()
-        self.crawl_string()
-        input('')
+            raise Exception('Unable to establish connection')
 
 
-
-obj=string_crawler()
-obj.run_func()
-input('')
-
-
-
+if __name__ == '__main__':
+    print('Please run main.py')
